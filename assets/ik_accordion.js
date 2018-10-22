@@ -141,10 +141,10 @@
 				$btn = $hdr.find('.button');
 				
 				if($btn[0] != $(event.currentTarget)[0]) { 
-					$btn.removeClass('expanded');
+					$btn.removeClass("expanded").attr("aria-expanded", "false");
 					$hdr.next().slideUp(plugin.options.animationSpeed);
 				} else { 
-					$btn.addClass('expanded');
+					$btn.addClass('expanded').attr('aria-expanded', "true");	
 					$hdr.next().slideDown(plugin.options.animationSpeed);
 				}
 			});
@@ -153,7 +153,9 @@
 		
 			isVisible = !!$panel.is(':visible');
 			$panel.slideToggle({ duration: plugin.options.animationSpeed });
-			
+			$me.attr('aria-expanded', function (i, attr) {
+				return attr == 'true' ? 'false' : 'true'
+			});
 		}
 	};
 	
